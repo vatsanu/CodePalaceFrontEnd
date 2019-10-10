@@ -1,0 +1,93 @@
+<div class="campaign_create">
+  <h1>Submit an Idea</h1>
+  <div class="camp_create_box">
+    <form [formGroup]="projectForm">
+      <div class="form-group">
+        <div *ngIf="!isEditing">
+          <label for="usr">Idea Title *</label>
+          <input type="text" class="form-control" placeholder="Enter title" formControlName="title">
+          <p *ngIf="projectForm.get('title').hasError('required') && (projectForm.get('title').touched || formSubmit)" class="value-err show">This is a mandatory field</p>
+        </div>
+        <div *ngIf="isEditing" class="no-edit">
+          <h2>Idea Title</h2>
+          {{project.title}}
+        </div>
+      </div>
+      <div class="form-group">
+        <div *ngIf="!isEditing">
+          <label for="comment">Idea Category *</label>
+          <select class="form-control" formControlName="category_id">
+            <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+          </select>
+        </div>
+        <div *ngIf="isEditing" class="no-edit">
+          <h2>Idea Category</h2>          
+          {{project.category_name}}
+        </div>
+      </div>
+      <h2>Upload your Idea Images</h2>
+			<div formArrayName="pictures_attributes">
+				<span class="image-div" *ngFor="let picture of getPictures(); let i = index">
+					<span (click)="removePictureAttribue(i)" class="fa fa-times cross"></span>
+					<img class="reward-image" [src]="picture.url" alt="img">
+				</span>
+				<span class="image-div" *ngFor="let image_data of projectForm.get('images_data').value; let i = index">
+					<span (click)="removeImageData(i)" class="fa fa-times cross"></span>
+					<img class="reward-image" [src]="image_data" alt="img">
+				</span>
+			</div>
+			<app-image-upload #imageUpload (click)="uploadImage()" (image)="setImageData($event)">
+				<img src="assets/img/camera-img.png" alt="img">
+				<h4>{{ 'PROJ_CREATE.UPLOAD_IMAGE' | translate }}</h4>
+			</app-image-upload>
+      <br>
+      <div *ngIf="!isEditing">
+        <h2>{{ 'PROJ_CREATE.CAMPAIGN_GOAL' | translate }} *</h2>
+        <p>{{ 'PROJ_CREATE.CAMPAIGN_GOAL_MSG' | translate }} </p>
+        <div class="row">
+           <div class="col-xs-6">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="$ 500" formControlName="pledged_amount">
+              <p *ngIf="projectForm.get('pledged_amount').hasError('required') && (projectForm.get('pledged_amount').touched || formSubmit)" class="value-err show">This is a mandatory field</p>
+            </div>
+          </div> 
+          <div class="col-xs-6">
+            <div class="camp_select slate">
+              <select formControlName="currency">
+                <option>USD</option>
+                <option>GBP</option>
+                <option>AUD</option>
+                <option>CAD</option>
+                <option>EUR</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+     <div *ngIf="isEditing" class="no-edit padding-bottom">
+        <h2>{{ 'PROJ_CREATE.CAMPAIGN_GOAL' | translate }}</h2>
+        {{project.pledged_amount}} {{project.currency}}
+      </div> 
+<!--       <div *ngIf="!isEditing" class="camp_flexi">
+        <h2>{{ 'PROJ_CREATE.FUNDING_MODEL' | translate }} *</h2>
+        <div class="col-xs-6" tooltip="{{ 'PROJ_CREATE.FLEXI_TOOLTIP' | translate }}" placement="top">
+          <div class="radio">
+            <input type="radio" id="boxi" name="funding_model" formControlName="funding_model" value="flexi">
+            <label for="boxi">
+            <h2>{{ 'PROJ_CREATE.FLEXI_MODEL' | translate }} <img src="assets/img/fixed-icon-1.png" alt="img"> </h2>
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-6" tooltip="{{ 'PROJ_CREATE.FIXED_TOOLTIP' | translate }}" placement="top">
+          <div class="radio">
+            <input type="radio" id="boxi-1" name="funding_model" formControlName="funding_model" value="fixed">
+            <label for="boxi-1">
+            <h2>{{ 'PROJ_CREATE.FIXED_MODEL' | translate }} <img src="assets/img/fixed-icon.png" alt="img"> </h2>
+            </label>
+          </div>
+        </div>
+      </div> -->
+      <div class="camp_link"> <a  class="btnNext">{{ 'PROJ_CREATE.NEXT' | translate }}</a> </div>
+    </form>
+  </div>
+</div>

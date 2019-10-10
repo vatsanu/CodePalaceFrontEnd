@@ -1,0 +1,37 @@
+.en {
+	background: url(../../../assets/img/icon1.png) no-repeat;
+}
+.float-left{
+	display:inline-flex;
+}
+.row {
+	margin: 100px
+  }
+  
+  
+  @media (max-width:535px) {
+	.small {
+  margin-top: 15px;
+	}
+}
+
+
+// .de {
+// 	background: url(../img/icon1.png) no-repeat;
+// }
+
+// .es {
+// 	background: url(../img/icon1.png) no-repeat;
+// }
+
+// .fr {
+// 	background: url(../img/icon1.png) no-repeat;
+// }
+
+// .it {
+// 	background: url(../img/icon1.png) no-repeat;
+// }
+
+// .pt {
+// 	background: url(../img/icon1.png) no-repeat;
+// }

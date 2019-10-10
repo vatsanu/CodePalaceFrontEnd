@@ -1,0 +1,74 @@
+<div class="campaign_create">
+    <h1 style="text-align: center">Submit an Idea</h1>
+    <div class="container">
+      <form [formGroup]="projectForm">
+        <div class="form-group col-xl-6">
+          <div>
+            <label for="usr">Idea Title *</label>
+            <input type="text" class="form-control" placeholder="Enter title" formControlName="title">
+            <p *ngIf="projectForm.get('title').hasError('required') && (projectForm.get('title').touched || formSubmit)" class="value-err show">This is a mandatory field</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div>
+            <label for="comment">Idea Category *</label>
+            <select class="form-control" formControlName="category_id">
+              <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="form-group">
+        <label>Upload your Idea Images</label>
+        <div formArrayName="pictures_attributes">
+            <span class="image-div" *ngFor="let picture of getPictures(); let i = index">
+              <span (click)="removePictureAttribue(i)" class="fa fa-times cross"></span>
+              <img class="reward-image" [src]="picture.url" alt="img">
+            </span>
+            <span class="image-div" *ngFor="let image_data of projectForm.get('images_data').value; let i = index">
+              <span (click)="removeImageData(i)" class="fa fa-times cross"></span>
+              <img class="reward-image" [src]="image_data" alt="img">
+            </span>
+          </div>
+        <app-image-upload #imageUpload (click)="uploadImage()" (image)="setImageData($event)">
+          <img src="assets/img/camera-img.png" alt="img">
+          <h4>Upload Image</h4>
+        </app-image-upload>
+      </div>
+        <br> -->
+        <div>
+          <label>Campaign Goal *</label>
+          <p>How much money would you like to raise for this Idea?</p>
+          <div class="row">
+             <div class="col-xs-6">
+              <div class="camp_select slate ">
+                <input type="text" class="form-control" placeholder="$ 500" formControlName="pledged_amount">
+                <p *ngIf="projectForm.get('pledged_amount').hasError('required') && (projectForm.get('pledged_amount').touched || formSubmit)" class="value-err show">This is a mandatory field</p>
+              </div>
+            </div> 
+            <div class="col-xs-6">
+              <div class="camp_select slate">
+                <select >
+                  <option>USD</option>
+                  <option>EUR</option>
+                  <option>INR</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-xl-6">
+            <div class="col-xl-6">
+              <label for="usr">Idea Description *</label>
+              <br>
+              <textarea rows="4" cols="157" formControlName="des">
+              Please Provide the description of your idea.
+              </textarea>
+              <p *ngIf="projectForm.get('des').hasError('required') && (projectForm.get('des').touched || formSubmit)" class="value-err show">This is a mandatory field</p>
+            </div>
+          </div>
+ 
+        <button type="submit" (click)="submitProject()">Submit</button>
+      </form>
+    </div>
+  </div>
+  
